@@ -24,6 +24,9 @@ dependency-reduced-pom.xml
 # Logs
 *.log
 
+# Documentation
+.doc/
+
 # OS specific
 .DS_Store
 Thumbs.db 

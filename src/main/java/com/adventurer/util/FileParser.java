@@ -19,8 +19,24 @@ public class FileParser {
      * @throws IOException en cas d'erreur de lecture
      */
     public static Map parseMapFile(Path mapPath) throws IOException {
-        // TODO: Implémenter le parsing du fichier de la carte
-        return null;
+        List<String> lines = Files.readAllLines(mapPath);
+        if (lines.isEmpty()) {
+            throw new IOException("Map file is empty");
+        }
+
+        int height = lines.size();
+        int width = lines.get(0).length();
+        char[][] grid = new char[height][width];
+
+        for (int y = 0; y < height; y++) {
+            String line = lines.get(y);
+            if (line.length() != width) {
+                throw new IOException("Inconsistent map width at line " + (y + 1));
+            }
+            grid[y] = line.toCharArray();
+        }
+
+        return new Map(grid);
     }
 
     /**
@@ -30,7 +46,24 @@ public class FileParser {
      * @throws IOException en cas d'erreur de lecture
      */
     public static String[] parseMovementsFile(Path movementsPath) throws IOException {
-        // TODO: Implémenter le parsing du fichier des mouvements
-        return null;
+        List<String> lines = Files.readAllLines(movementsPath);
+        if (lines.size() != 2) {
+            throw new IOException("Movements file must contain exactly 2 lines");
+        }
+
+        String position = lines.get(0);
+        String movements = lines.get(1);
+
+        // Validation du format des coordonnées (x,y)
+        if (!position.matches("\\d+,\\d+")) {
+            throw new IOException("Invalid position format. Expected 'x,y'");
+        }
+
+        // Validation des mouvements (N,S,E,O uniquement)
+        if (!movements.matches("[NSEO]+")) {
+            throw new IOException("Invalid movements. Only N,S,E,O are allowed");
+        }
+
+        return new String[]{position, movements};
     }
 } 
