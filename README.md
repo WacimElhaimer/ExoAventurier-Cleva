@@ -69,7 +69,7 @@ src/
         │   └── FileParserTest.java
         └── integration/
             └── IntegrationTest.java    # Tests du sujet
-
+```
 ## Contribution
 Les contributions sont les bienvenues ! Veuillez suivre ces étapes :
 1. Fork du projet
