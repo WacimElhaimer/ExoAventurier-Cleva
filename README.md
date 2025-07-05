@@ -20,7 +20,7 @@ mvn clean install
 ## Utilisation
 ### Format des fichiers d'entrée
 
-#### Fichier de carte (map.txt)
+#### Fichier de carte (carte.txt)
 ```
 C 10 10    # Carte de taille 10x10
 B 1 1      # Bois en position (1,1)
