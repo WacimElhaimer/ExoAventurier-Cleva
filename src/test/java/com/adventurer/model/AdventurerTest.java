@@ -7,16 +7,32 @@ import static org.junit.jupiter.api.Assertions.*;
 class AdventurerTest {
     private Adventurer adventurer;
     private Map map;
-    private static final char[][] TEST_GRID = {
+    private static final char[][] REAL_MAP = {
         "###    ######    ###".toCharArray(),
         "###      ##      ###".toCharArray(),
         "##     ##  ##     ##".toCharArray(),
-        "#      ##  ##      #".toCharArray()
+        "#      ##  ##      #".toCharArray(),
+        "##                ##".toCharArray(),
+        "#####          #####".toCharArray(),
+        "###### ##  ##  #####".toCharArray(),
+        " #     ######     # ".toCharArray(),
+        "     ########       ".toCharArray(),
+        "    ############    ".toCharArray(),
+        "    ############    ".toCharArray(),
+        "     ########      #".toCharArray(),
+        " #     ######     ##".toCharArray(),
+        "###### ##  ## ######".toCharArray(),
+        "#####          #####".toCharArray(),
+        "##                ##".toCharArray(),
+        "#   ## #    # ##   #".toCharArray(),
+        "##   ##      ##   ##".toCharArray(),
+        "###    #    #    ###".toCharArray(),
+        "###    ######    ###".toCharArray()
     };
 
     @BeforeEach
     void setUp() {
-        map = new Map(TEST_GRID);
+        map = new Map(REAL_MAP);
         adventurer = new Adventurer(4, 0); // Position initiale dans un espace libre
     }
 
@@ -84,15 +100,15 @@ class AdventurerTest {
 
     @Test
     void move_shouldReturnFalse_whenMovingIntoWall() {
-        // Setup: place adventurer next to wall
-        adventurer.setPosition(4, 0);
+        // Setup: place adventurer next to wall - position (3,0) -> trying to move west to (2,0) which is a wall
+        adventurer.setPosition(3, 0);
         
         // When: try to move into wall
         boolean result = adventurer.move('O', map);
         
         // Then
         assertFalse(result, "Movement should fail");
-        assertEquals(4, adventurer.getX(), "Position should not change");
+        assertEquals(3, adventurer.getX(), "Position should not change");
         assertEquals(0, adventurer.getY(), "Position should not change");
     }
 
@@ -118,8 +134,8 @@ class AdventurerTest {
     }
 
     @Test
-    void executeMovements_shouldExecuteValidSequence() {
-        // Setup
+    void executeMovements_shouldExecuteValidSequence_firstScenario() {
+        // Premier test du sujet : 3,0 -> SSSSEEEEEENN -> (9,2)
         adventurer.setPosition(3, 0);
         String movements = "SSSSEEEEEENN";
         
@@ -130,5 +146,20 @@ class AdventurerTest {
         assertTrue(result, "Movement sequence should succeed");
         assertEquals(9, adventurer.getX(), "Final X position should be 9");
         assertEquals(2, adventurer.getY(), "Final Y position should be 2");
+    }
+
+    @Test
+    void executeMovements_shouldExecuteValidSequence_secondScenario() {
+        // Deuxième test du sujet : 6,9 -> OONOOOSSO -> (7,5)
+        adventurer.setPosition(6, 9);
+        String movements = "OONOOOSSO";
+        
+        // When
+        boolean result = adventurer.executeMovements(movements, map);
+        
+        // Then
+        assertTrue(result, "Movement sequence should succeed");
+        assertEquals(7, adventurer.getX(), "Final X position should be 7");
+        assertEquals(5, adventurer.getY(), "Final Y position should be 5");
     }
 } 

@@ -32,8 +32,9 @@ class FileParserTest {
 
         // Then
         assertNotNull(map, "Map should not be null");
-        assertTrue(map.isValidPosition(4, 0), "Position (4,0) should be valid (empty space)");
-        assertFalse(map.isValidPosition(0, 0), "Position (0,0) should be invalid (wall)");
+        assertTrue(map.isValidPosition(4, 0), "Position (4,0) should be valid (in bounds)");
+        assertTrue(map.isFreeSpace(4, 0), "Position (4,0) should be free space");
+        assertFalse(map.isFreeSpace(0, 0), "Position (0,0) should be a wall");
     }
 
     @Test

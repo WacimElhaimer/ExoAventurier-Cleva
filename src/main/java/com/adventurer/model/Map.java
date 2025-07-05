@@ -25,8 +25,7 @@ public class Map {
      * @return true si la position est valide, false sinon
      */
     public boolean isValidPosition(int x, int y) {
-        return y >= 0 && y < grid.length && 
-               x >= 0 && x < grid[0].length;
+        return y >= 0 && y < grid.length && x >= 0 && x < grid[0].length;
     }
 
     /**

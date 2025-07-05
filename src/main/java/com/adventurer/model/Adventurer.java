@@ -45,12 +45,13 @@ public class Adventurer {
                 throw new IllegalArgumentException("Invalid direction: " + direction);
         }
 
-        if (map.isValidPosition(newX, newY) && map.isFreeSpace(newX, newY)) {
-            x = newX;
-            y = newY;
-            return true;
+        if (!map.isValidPosition(newX, newY) || !map.isFreeSpace(newX, newY)) {
+            return false;
         }
-        return false;
+
+        x = newX;
+        y = newY;
+        return true;
     }
 
     /**
@@ -60,12 +61,13 @@ public class Adventurer {
      * @return true si tous les mouvements ont réussi
      */
     public boolean executeMovements(String movements, Map map) {
+        boolean allSucceeded = true;
         for (char direction : movements.toCharArray()) {
             if (!move(direction, map)) {
-                return false;
+                allSucceeded = false;
             }
         }
-        return true;
+        return allSucceeded;
     }
 
     /**
