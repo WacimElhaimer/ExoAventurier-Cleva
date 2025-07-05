@@ -50,17 +50,25 @@ mvn verify
 ```
 src/
 ├── main/java/
-│   └── com/aventurier/
-│       ├── Map.java           # Gestion de la carte
-│       ├── Adventurer.java    # Logique de l'aventurier
-│       ├── GameEngine.java    # Moteur de jeu
-│       └── FileParser.java    # Lecture des fichiers
+│   └── com/adventurer/
+│       ├── model/
+│       │   ├── Map.java           # Gestion de la carte
+│       │   └── Adventurer.java    # Logique de l'aventurier
+│       ├── engine/
+│       │   └── GameEngine.java    # Moteur de jeu
+│       └── util/
+│           └── FileParser.java    # Lecture des fichiers
 └── test/java/
-    └── com/aventurier/
-        ├── MapTest.java
-        ├── AdventurerTest.java
-        └── GameEngineTest.java
-```
+    └── com/adventurer/
+        ├── model/
+        │   ├── MapTest.java
+        │   └── AdventurerTest.java
+        ├── engine/
+        │   └── GameEngineTest.java
+        ├── util/
+        │   └── FileParserTest.java
+        └── integration/
+            └── IntegrationTest.java    # Tests du sujet
 
 ## Contribution
 Les contributions sont les bienvenues ! Veuillez suivre ces étapes :
